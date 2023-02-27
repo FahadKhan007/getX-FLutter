@@ -1,74 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx/homepage.dart';
-import 'package:getx/productpage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  var count = 0.obs;
+  void increaseNum() {
+    count++;
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Hey we are learning getX",
-
-      // named route using getX
-
-      initialRoute: '/',
-      defaultTransition: Transition.zoom,
-      getPages: [
-        GetPage(
-          name: "/",
-          page: () => const MyApp(),
-        ),
-        GetPage(
-          name: "/HomePage",
-          page: () => const HomePage(),
-        ),
-        GetPage(
-          name: "/ProductPage",
-          page: () => const ProductPage(),
-        ),
-      ],
+      title: "Hey we are learning state management using getX",
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent,
-          title: const Text("This is Main Page"),
+          title: const Text("Counting Pages"),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Obx(
+                () => Text(
+                  "Increase Number: $count",
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    Colors.redAccent,
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22),
-                      side: const BorderSide(
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                  ),
+                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
                 ),
                 onPressed: () {
-                  Get.toNamed('/HomePage'); //named route
+                  increaseNum();
                 },
-                child: const Text(
-                  "Go to home page",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-              )
+                child: const Text("Increse Number"),
+              ),
             ],
           ),
         ),
