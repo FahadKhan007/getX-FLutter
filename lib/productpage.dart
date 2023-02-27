@@ -24,9 +24,7 @@ class ProductPage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                Get.to(
-                  const HomePage(),
-                );
+                Get.toNamed('/HomePage');
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(

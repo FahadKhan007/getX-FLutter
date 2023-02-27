@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx/homepage.dart';
+import 'package:getx/productpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,25 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Hey we are learning getX",
+
+      // named route using getX
+
+      initialRoute: '/',
+      defaultTransition: Transition.zoom,
+      getPages: [
+        GetPage(
+          name: "/",
+          page: () => const MyApp(),
+        ),
+        GetPage(
+          name: "/HomePage",
+          page: () => const HomePage(),
+        ),
+        GetPage(
+          name: "/ProductPage",
+          page: () => const ProductPage(),
+        ),
+      ],
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent,
@@ -39,9 +59,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Get.to(
-                    const HomePage(),
-                  );
+                  Get.toNamed('/HomePage'); //named route
                 },
                 child: const Text(
                   "Go to home page",

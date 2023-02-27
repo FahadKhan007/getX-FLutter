@@ -23,9 +23,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                Get.to(
-                  const ProductPage(),
-                );
+                Get.toNamed("/ProductPage");
               },
               child: const Text(
                 "Go to product page",
