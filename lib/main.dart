@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,44 +13,44 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Learn getX",
+      title: "Hey we are learning getX",
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.greenAccent,
-          title: const Text("Hey this is Fahad learing getX"),
+          backgroundColor: Colors.redAccent,
+          title: const Text("This is Main Page"),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: <Widget>[
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.greenAccent),
-                ),
-                onPressed: () {
-                  Get.bottomSheet(
-                    Container(
-                      child: Wrap(
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(Icons.light_mode_outlined),
-                            title: Text("Light Theme"),
-                            onTap: () => {Get.changeTheme(ThemeData.light())},
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.dark_mode_outlined),
-                            title: Text("Dark Theme"),
-                            onTap: () => {Get.changeTheme(ThemeData.dark())},
-                          ),
-                        ],
+                  backgroundColor: MaterialStateProperty.all(
+                    Colors.redAccent,
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22),
+                      side: const BorderSide(
+                        color: Colors.blueAccent,
                       ),
                     ),
+                  ),
+                ),
+                onPressed: () {
+                  Get.to(
+                    const HomePage(),
                   );
                 },
-                child: const Text("Bottom Sheet"),
-              ),
+                child: const Text(
+                  "Go to home page",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                  ),
+                ),
+              )
             ],
           ),
         ),
