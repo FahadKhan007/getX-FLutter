@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/controller.dart';
 import 'package:getx/customclass.dart';
 
 void main() {
@@ -18,61 +19,43 @@ class MyApp extends StatelessWidget {
       title: "We are learning getX obx with custom class",
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.greenAccent,
-          title: const Text(
-            "State Management obx with custom class",
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 2,
-            ),
-          ),
+          title: const Text("Controller getX"),
         ),
-        body: Container(
-          color: Color.fromARGB(255, 82, 74, 74),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Obx(
-                  () => Text(
-                    "Name ${learner.name.value}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GetX<Controller>(
+                  init: Controller(),
+                  builder: (controller) {
+                    return Text(
+                      "This value is: ${controller.count}",
+                      style: const TextStyle(
                         fontSize: 22,
-                        color: Colors.white70),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.redAccent),
-                  ),
-                  onPressed: () {
-                    learner.name.value = learner.name.value.toUpperCase();
-                  },
-                  child: const Text("Make it to UPPER CASE"),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blueAccent),
-                  ),
-                  onPressed: () {
-                    learner.name.value = learner.name.value.toLowerCase();
-                  },
-                  child: const Text("Make it to lower case"),
-                ),
-              ],
-            ),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.find<Controller>().increment();
+                },
+                child: const Text("Increse number"),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.find<Controller>().decrement();
+                },
+                child: const Text("Decrease number"),
+              ),
+            ],
           ),
         ),
       ),
